@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Classification</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            transition: transform 0.2s;
+            border: none;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .image-container {
+            width: 100px;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+            margin: 0 auto;
+        }
+        .card-body {
+            padding: 10px;
+        }
+        .btn-primary {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 text-center">Image Classification</h1>
+        <div class="row mt-4">
+            {% for image_path in image_paths %}
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="image-container" style="background-image: url('{{ url_for('static', filename='uploads/' ~ image_path.split('/')[-1]) }}');"></div>
+                        <div class="card-body text-center">
+                            <a href="{{ url_for('classify_image', image_path=image_path.split('/')[-1]) }}" class="btn btn-primary">Classify</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
